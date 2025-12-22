@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Notice | CampusSMS</title>
+</head>
+<body>
+
+<h2>Add Important Notice</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Notice Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Notice Message:</label><br>
+    <textarea name="message" rows="5" cols="40" required></textarea><br><br>
+
+    <button type="submit">Post Notice</button>
+</form>
+
+<br>
+<a href="{% url 'view_notices' %}">View All Notices</a>
+
+</body>
+</html>

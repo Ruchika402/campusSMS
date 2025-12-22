@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class-wise Attendance</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #ccc; text-align: center; }
+    </style>
+</head>
+<body>
+
+<h2>Class-wise Attendance ({{ today }})</h2>
+
+<form method="GET">
+    <label>Select Class:</label>
+    <select name="classroom" required onchange="this.form.submit()">
+        <option value="">-- Select Class --</option>
+        {% for c in classes %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+{% if students %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="classroom" value="{{ request.GET.classroom }}">
+
+    <table>
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Present</th>
+            <th>Absent</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <td>{{ student.roll }}</td>
+            <td>{{ student.name }}</td>
+            <td><input type="radio" name="{{ student.id }}" value="P" required></td>
+            <td><input type="radio" name="{{ student.id }}" value="A"></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <button type="submit">Save Attendance</button>
+</form>
+{% endif %}
+
+<a href="{% url 'student_list' %}">Back to Student List</a>
+
+</body>
+</html>

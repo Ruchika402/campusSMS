@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campus SMS - Student List</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
+        th { background-color: #f2f2f2; }
+        a { text-decoration: none; padding: 4px 8px; background-color: #4CAF50; color: white; border-radius: 4px; }
+        a:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'teacher_login' %}" style="float:right;">
+    Teacher Login
+</a>
+
+    <h1>CampusSMS</h1>
+    <!-- Add Student Link -->
+    <a href="{% url 'add_student' %}">+ Add Student</a>
+    <br><br>
+
+    <!-- Student Table -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Class</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+            <th>Marks</th> <!-- New -->
+            <th>Result</th> <!-- New -->
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll }}</td>
+            <td>{{ student.classroom.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone }}</td>
+            <td>
+                <a href="{% url 'update_student' student.id %}">Edit</a>
+                <a href="{% url 'delete_student' student.id %}">Delete</a>
+            </td>
+           <td>
+            <a href="{% url 'add_marks' student.id %}">Add Marks</a>
+        </td>
+        <td>
+            <a href="{% url 'student_result' student.id %}">View Result</a>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+    <hr>
+
+<h2>📋 Attendance System</h2>
+
+<div style="margin-bottom:15px;">
+    <a href="{% url 'mark_attendance' %}">
+        <button>📝 Mark Attendance</button>
+    </a>
+
+    <a href="{% url 'class_attendance' %}">
+        <button>🏫 Class-wise Attendance</button>
+    </a>
+
+    <a href="{% url 'attendance_dashboard' %}">
+        <button>📊 Attendance Dashboard</button>
+    </a>
+</div>
+
+<hr>
+<h2>📢 Latest Notices</h2>
+
+{% if notices %}
+    {% for notice in notices %}
+        <div style="border:1px solid #999; padding:8px; margin-bottom:8px;">
+            <strong>{{ notice.title }}</strong><br>
+            {{ notice.message }}<br>
+            <small>{{ notice.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No notices yet.</p>
+{% endif %}
+
+<hr>
+<h2>➕ Add New Notice</h2>
+<form method="post" action="{% url 'add_notice' %}">
+    {% csrf_token %}
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+
+    <button type="submit">Post Notice</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Important Notices | CampusSMS</title>
+</head>
+<body>
+
+<h2>Important Notices</h2>
+
+{% for notice in notices %}
+    <div style="border:1px solid #444; padding:10px; margin-bottom:10px;">
+        <h3>{{ notice.title }}</h3>
+        <p>{{ notice.message }}</p>
+        <small>
+            Posted on {{ notice.created_at }} |
+            By {{ notice.teacher.username }}
+        </small>
+    </div>
+{% empty %}
+    <p>No notices available.</p>
+{% endfor %}
+
+<br>
+<a href="/">Back to Home</a>
+
+</body>
+</html>

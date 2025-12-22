@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .card {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            background: #f2f2f2;
+            border-radius: 8px;
+            min-width: 200px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>📊 Attendance Dashboard ({{ today }})</h2>
+
+<div class="card">👨‍🎓 Total Students<br><b>{{ total_students }}</b></div>
+<div class="card">✅ Present Today<br><b>{{ today_present }}</b></div>
+<div class="card">❌ Absent Today<br><b>{{ today_absent }}</b></div>
+<div class="card">📈 Overall Attendance %<br><b>{{ overall_percentage }}%</b></div>
+
+<h3>🏫 Class-wise Attendance</h3>
+
+<table>
+    <tr>
+        <th>Class</th>
+        <th>Present Today</th>
+        <th>Total Students</th>
+    </tr>
+
+    {% for c in class_stats %}
+    <tr>
+        <td>{{ c.name }}</td>
+        <td>{{ c.present }}</td>
+        <td>{{ c.total }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="{% url 'student_list' %}">Back to Student List</a>
+
+</body>
+</html>

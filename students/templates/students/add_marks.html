@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Marks for {{ student.name }}</title>
+</head>
+<body>
+    <h2>Add Marks for {{ student.name }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{% url 'student_list' %}">⬅ Back to Student List</a>
+</body>
+</html>
