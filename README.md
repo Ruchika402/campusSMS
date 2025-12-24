@@ -1,15 +1,17 @@
 # CampusSMS
-
-A Django-based Student Management System to track attendance, marks, and notices.
+A Django-based Student Management System.
 
 ## Features
-- Add, view, and manage students
+- Add/view students
 - Track attendance
-- Record marks and exam details
-- Post notices for teachers and students
+- Record marks
+- Post notices
 
 ## How to Run
-1. Clone the repository
-   ```bash
-   git clone https://github.com/Ruchika402/campusSMS.git
+1. Clone the repo
+2. Create virtual environment
+3. Install Django
+4. Run server
 
+## Author
+Ruchika Adak
