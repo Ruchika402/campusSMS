@@ -1,3 +1,6 @@
+# CampusSMS - Student Management Module
+
+
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import StudentForm
 from .models import Student
