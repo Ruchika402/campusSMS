@@ -19,7 +19,9 @@ urlpatterns =[
     path('marks/add/<int:student_id>/', views.add_marks, name='add_marks'),
     path('result/<int:student_id>/', views.student_result, name='student_result'),
     path('subject/add/', views.add_subject, name='add_subject'),
+    path('teacher/register/', views.teacher_register, name='teacher_register'),
     path('teacher/login/', views.teacher_login, name='teacher_login'),
+    path('teacher/logout/', views.teacher_logout, name='teacher_logout'),
     path('teacher/dashboard/', views.teacher_dashboard, name='teacher_dashboard'),
     # Notices
     path('notice/add/', views.add_notice, name='add_notice'),

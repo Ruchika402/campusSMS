@@ -241,7 +241,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def teacher_dashboard(request):
-    return render(request, 'students/teacher_dashboard.html')
+    teacher = request.user
+    return render(request, 'students/teacher_dashboard.html', {'teacher': teacher})
 
 
 @login_required
@@ -261,3 +262,34 @@ def view_notices(request):
     notices = Notice.objects.all().order_by('-created_at')
     return render(request, 'students/view_notices.html', {'notices': notices})
 from .models import Notice
+
+
+
+
+def teacher_register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        confirm = request.POST['confirm']
+
+        if password != confirm:
+            return render(request, 'students/teacher_register.html', {
+                'error': 'Passwords do not match'
+            })
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'students/teacher_register.html', {
+                'error': 'Username already exists'
+            })
+
+        User.objects.create_user(username=username, password=password)
+        return redirect('teacher_login')
+
+    return render(request, 'students/teacher_register.html')
+
+from django.contrib.auth.models import User
+
+
+def teacher_logout(request):
+    logout(request)
+    return redirect('teacher_login')

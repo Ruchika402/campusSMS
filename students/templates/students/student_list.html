@@ -10,8 +10,8 @@
     </style>
 </head>
 <body>
-    <a href="{% url 'teacher_login' %}" style="float:right;">
-    Teacher Login
+     
+    
 </a>
 
     <h1>CampusSMS</h1>
@@ -99,6 +99,29 @@
     <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
 
     <button type="submit">Post Notice</button>
+    <div style="
+    position: absolute;
+    top: 15px;
+    right: 20px;
+">
+    <a href="{% url 'teacher_register' %}" style="
+        margin-right: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #198754;
+    ">
+        📝 Teacher Register
+    </a>
+
+    <a href="{% url 'teacher_login' %}" style="
+        font-weight: bold;
+        text-decoration: none;
+        color: #0a58ca;
+    ">
+        🔐 Teacher Login
+    </a>
+</div>
+
 </form>
 
 </body>
