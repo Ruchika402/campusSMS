@@ -1,5 +1,5 @@
 # CampusSMS - Student Management Module
-
+# Day5 learning git diff
 
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import StudentForm
@@ -293,3 +293,15 @@ from django.contrib.auth.models import User
 def teacher_logout(request):
     logout(request)
     return redirect('teacher_login')
+
+
+
+from rest_framework import viewsets
+from .models import Student
+from .serializers import StudentSerializer
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+from .models import Subject
+from .serializers import SubjectSerializer
